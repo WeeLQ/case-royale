@@ -3,186 +3,99 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>CASE ROYALE</title>
-
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
- --gold:#e8bd69;
- --gold2:#a97832;
- --bg:#090909;
- --card:#151515;
- --muted:#898989;
-}
-body{
- background:var(--bg);
- color:#fff;
- font-family:Arial,sans-serif;
- min-height:100vh;
- padding:18px 15px 35px;
-}
+:root{--gold:#e9c477;--bg:#090909}
+body{background:var(--bg);color:#fff;font-family:Arial,sans-serif;padding:16px 14px 35px}
 .app{max-width:520px;margin:auto}
-.header{
- display:flex;justify-content:space-between;
- align-items:center;margin-bottom:25px;
-}
-.logo{
- font-size:23px;font-weight:900;
- letter-spacing:2px;color:var(--gold);
-}
-.logo span{color:#fff}
-.balance{
- background:#191919;border:1px solid #393027;
- border-radius:12px;padding:10px 13px;
- color:var(--gold);font-weight:bold;
-}
-.hero{
- text-align:center;padding:25px 10px 20px;
- background:radial-gradient(ellipse at center,#352719 0%,#17110c 40%,#090909 78%);
- border:1px solid #49351e;border-radius:20px;
- margin-bottom:24px;
-}
-.eyebrow{
- color:var(--gold);font-size:11px;
- letter-spacing:4px;margin-bottom:12px;
-}
-h1{
- font-size:35px;letter-spacing:3px;
- font-weight:900;margin-bottom:8px;
-}
-.subtitle{color:#aaa;font-size:13px}
-.case-image{
- width:175px;height:175px;
- object-fit:contain;margin:18px auto 12px;
- filter:drop-shadow(0 0 25px #a8793b66);
-}
-.price{
- color:var(--gold);font-size:20px;
- font-weight:bold;margin-bottom:17px;
-}
-.open-btn{
- width:100%;border:0;border-radius:12px;
- padding:17px;background:linear-gradient(135deg,#f2d18d,#b98236);
- color:#160f07;font-size:16px;
- font-weight:900;letter-spacing:1px;
- cursor:pointer;
-}
-.open-btn:disabled{opacity:.5;cursor:wait}
-.section-title{
- display:flex;justify-content:space-between;
- align-items:center;margin:26px 2px 14px;
-}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.logo{font-size:23px;font-weight:900;letter-spacing:2px;color:var(--gold)}
+.logo span{color:white}
+.balance{background:#171717;border:1px solid #5b4527;border-radius:12px;padding:10px 13px;color:var(--gold);font-weight:bold}
+.hero{padding:24px 15px;text-align:center;border:1px solid #574326;border-radius:20px;background:radial-gradient(ellipse at 50% 35%,#48331c 0%,#21170e 42%,#0c0b09 85%);box-shadow:0 10px 35px #000}
+.eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);margin-bottom:12px}
+h1{font-size:34px;letter-spacing:3px}
+.subtitle{color:#aaa;font-size:13px;margin-top:8px}
+.case-image{width:170px;height:170px;object-fit:contain;margin:18px auto;display:block;filter:drop-shadow(0 0 24px #d49b4d88)}
+.price{font-size:21px;color:var(--gold);font-weight:bold;margin-bottom:16px}
+.open-btn{width:100%;border:0;border-radius:12px;padding:17px;background:linear-gradient(135deg,#f4d89d,#b98235);color:#1b1207;font-size:16px;font-weight:900;cursor:pointer}
+.open-btn:disabled{opacity:.55}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:27px 2px 14px}
 .section-title h2{font-size:17px}
-.section-title span{font-size:11px;color:var(--muted)}
-.gifts{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:10px;
-}
+.section-title span{font-size:11px;color:#888}
+.gifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
 .gift{
- min-width:0;background:linear-gradient(145deg,#24201a,#111);
- border:1px solid #393027;border-radius:13px;
- padding:10px 7px 12px;text-align:center;
- overflow:hidden;
+ position:relative;overflow:hidden;min-width:0;
+ border:1px solid #806039;border-radius:15px;
+ padding:9px 7px 12px;text-align:center;
+ background:linear-gradient(145deg,#30271d,#17130f 65%,#0c0b0a);
+ box-shadow:inset 0 0 18px #d29b3b18,0 5px 14px #0009;
+}
+.gift::before{
+ content:"";position:absolute;width:100px;height:100px;
+ left:50%;top:15px;transform:translateX(-50%);
+ background:radial-gradient(circle,#d6a95755,transparent 70%);
+ pointer-events:none;
 }
 .gift img{
- width:100%;aspect-ratio:1/1;
- object-fit:contain;display:block;
- filter:drop-shadow(0 4px 9px #000);
+ position:relative;z-index:1;
+ display:block;width:100%;aspect-ratio:1/1;
+ object-fit:contain;
+ filter:drop-shadow(0 5px 9px #000) drop-shadow(0 0 8px #e3b65c55);
 }
-.gift-name{
- font-size:11px;color:#ddd;
- margin-top:5px;min-height:25px;
- display:flex;align-items:center;justify-content:center;
-}
-.gift-price{
- font-size:12px;color:var(--gold);
- font-weight:bold;margin-top:4px;
-}
-.result{
- display:none;margin-top:22px;
- border:1px solid var(--gold2);
- background:linear-gradient(145deg,#292016,#111);
- border-radius:18px;padding:20px;text-align:center;
-}
-.result h2{color:var(--gold);font-size:19px}
-.result img{
- width:170px;height:170px;object-fit:contain;
- margin:12px auto;
- display:block;
-}
-.result-name{font-size:18px;font-weight:bold}
+.gift-name{position:relative;z-index:1;font-size:11px;color:#eee;min-height:23px;display:flex;align-items:center;justify-content:center}
+.gift-price{position:relative;z-index:1;font-size:12px;color:var(--gold);font-weight:bold;margin-top:5px}
+.result{display:none;margin-top:22px;padding:20px;text-align:center;border:1px solid #b88a42;border-radius:18px;background:radial-gradient(circle at 50% 40%,#46321c,#15110c 75%)}
+.result h2{color:var(--gold);font-size:20px}
+.result img{width:175px;height:175px;object-fit:contain;display:block;margin:12px auto;filter:drop-shadow(0 0 20px #d4a44d88)}
+.result-name{font-size:19px;font-weight:bold}
 .result-value{color:var(--gold);margin-top:8px}
-.status{
- text-align:center;color:var(--muted);
- font-size:12px;margin-top:18px;min-height:18px;
-}
-.footer{
- text-align:center;color:#555;
- font-size:10px;margin-top:30px;
- letter-spacing:1px;
-}
-@media(max-width:360px){
- .gifts{gap:7px}
- .gift{padding:7px 4px}
- h1{font-size:29px}
-}
+.status{text-align:center;color:#aaa;font-size:12px;margin-top:17px;min-height:18px}
+.footer{text-align:center;color:#555;font-size:10px;margin-top:30px;letter-spacing:1px}
+@media(max-width:360px){.gifts{gap:7px}.gift{padding:7px 4px}h1{font-size:29px}}
 </style>
 </head>
-
 <body>
 <div class="app">
+<header class="header">
+ <div class="logo">CASE <span>ROYALE</span></div>
+ <div class="balance" id="balance">0 CR</div>
+</header>
 
- <header class="header">
-  <div class="logo">CASE <span>ROYALE</span></div>
-  <div class="balance" id="balance">0 CR</div>
- </header>
+<section class="hero">
+ <div class="eyebrow">PREMIUM COLLECTION</div>
+ <h1>CASE ROYALE</h1>
+ <div class="subtitle">Открывай. Получай. Собирай.</div>
+ <img class="case-image" src="https://yaythjpfxkuyhmjhwitk.supabase.co/storage/v1/object/public/telegram-gifts/5170521118301225164-thumb.webp" alt="Кейс">
+ <div class="price">30 CR</div>
+ <button class="open-btn" id="openBtn" onclick="openCase()">ОТКРЫТЬ КЕЙС</button>
+</section>
 
- <section class="hero">
-  <div class="eyebrow">PREMIUM COLLECTION</div>
-  <h1>CASE ROYALE</h1>
-  <div class="subtitle">Открывай. Получай. Собирай.</div>
+<div class="section-title">
+ <h2>СОДЕРЖИМОЕ КЕЙСА</h2>
+ <span>11 ПОДАРКОВ</span>
+</div>
+<section class="gifts" id="gifts"></section>
 
-  <img class="case-image"
-   src="https://yaythjpfxkuyhmjhwitk.supabase.co/storage/v1/object/public/telegram-gifts/5170521118301225164-thumb.webp"
-   alt="CASE ROYALE">
-
-  <div class="price">30 CR</div>
-  <button class="open-btn" id="openBtn" onclick="openCase()">
-   ОТКРЫТЬ КЕЙС
-  </button>
- </section>
-
- <div class="section-title">
-  <h2>СОДЕРЖИМОЕ КЕЙСА</h2>
-  <span>11 ПОДАРКОВ</span>
- </div>
-
- <section class="gifts" id="gifts"></section>
-
- <section class="result" id="result">
-  <h2>ПОЗДРАВЛЯЕМ!</h2>
-  <img id="resultImage" src="" alt="Подарок">
-  <div class="result-name" id="resultName"></div>
-  <div class="result-value" id="resultValue"></div>
- </section>
-
- <div class="status" id="status"></div>
-
- <footer class="footer">
-  CASE ROYALE · PREMIUM EXPERIENCE
- </footer>
-
+<section class="result" id="result">
+ <h2>ТВОЙ ПОДАРОК!</h2>
+ <img id="resultImage" src="" alt="Подарок">
+ <div class="result-name" id="resultName"></div>
+ <div class="result-value" id="resultValue"></div>
+</section>
+<div class="status" id="status"></div>
+<footer class="footer">CASE ROYALE · PREMIUM EXPERIENCE</footer>
 </div>
 
 <script>
-const SUPABASE_URL = "https://yaythjpfxkuyhmjhwitk.supabase.co";
-const SUPABASE_KEY = "sb_publishable_SExvyAXoXzpz8bvEy0kFow_7aWb4f7F";
-const API_URL = SUPABASE_URL + "/functions/v1/case-royale-api";
+const SUPABASE_URL="https://yaythjpfxkuyhmjhwitk.supabase.co";
+const SUPABASE_KEY="sb_publishable_SExvyAXoXzpz8bvEy0kFow_7aWb4f7F";
+const API_URL=SUPABASE_URL+"/functions/v1/case-royale-api";
 
-const gifts = [
+const gifts=[
  {id:"5170145012310081615",name:"Сердце",stars:15},
  {id:"5170233102089322756",name:"Мишка",stars:15},
  {id:"5170250947678437525",name:"Подарок",stars:25},
@@ -197,14 +110,11 @@ const gifts = [
 ];
 
 function giftImage(id){
- return SUPABASE_URL +
- "/storage/v1/object/public/telegram-gifts/" +
- id + "-thumb.webp";
+ return SUPABASE_URL+"/storage/v1/object/public/telegram-gifts/"+id+"-thumb.webp";
 }
 
 function renderGifts(){
- const container=document.getElementById("gifts");
- container.innerHTML=gifts.map(g=>`
+ document.getElementById("gifts").innerHTML=gifts.map(g=>`
   <div class="gift">
    <img src="${giftImage(g.id)}" alt="${g.name}" loading="lazy">
    <div class="gift-name">${g.name}</div>
@@ -214,27 +124,18 @@ function renderGifts(){
 }
 
 const tg=window.Telegram?.WebApp;
-if(tg){
- tg.ready();
- tg.expand();
-}
+if(tg){tg.ready();tg.expand();}
 
-function setStatus(message){
- document.getElementById("status").textContent=message;
-}
+function setStatus(s){document.getElementById("status").textContent=s;}
 
 async function openCase(){
  const button=document.getElementById("openBtn");
- const initData=tg?.initData || "";
-
- if(!initData){
-  setStatus("Открой игру через Telegram.");
-  return;
- }
+ const initData=tg?.initData||"";
+ if(!initData){setStatus("Открой игру через Telegram.");return;}
 
  button.disabled=true;
  button.textContent="ОТКРЫВАЕМ...";
- setStatus("Удачи! Определяем твой подарок...");
+ setStatus("Определяем твой подарок...");
  document.getElementById("result").style.display="none";
 
  try{
@@ -245,49 +146,32 @@ async function openCase(){
     "apikey":SUPABASE_KEY,
     "Authorization":"Bearer "+SUPABASE_KEY
    },
-   body:JSON.stringify({
-    action:"open_case",
-    initData:initData
-   })
+   body:JSON.stringify({action:"open_case",initData})
   });
-
   const data=await response.json();
 
-  if(!response.ok || !data.success){
+  if(!response.ok||!data.success){
    const errors={
-    "INSUFFICIENT_BALANCE":"Недостаточно средств на балансе.",
-    "PROFILE_NOT_FOUND":"Профиль не найден. Попробуй перезапустить игру.",
-    "CASE_NOT_FOUND":"Кейс временно недоступен."
+    INSUFFICIENT_BALANCE:"Недостаточно средств на балансе.",
+    PROFILE_NOT_FOUND:"Профиль не найден. Перезапусти игру.",
+    CASE_NOT_FOUND:"Кейс временно недоступен."
    };
-   setStatus(errors[data.error] || "Ошибка: "+(data.error || "не удалось открыть кейс"));
+   setStatus(errors[data.error]||"Ошибка: "+(data.error||"не удалось открыть кейс"));
    return;
   }
 
   const gift=data.gift;
   const found=gifts.find(g=>g.id===gift.telegram_gift_id);
-
-  document.getElementById("balance").textContent=
-   Number(data.balance).toFixed(0)+" CR";
-
-  document.getElementById("resultImage").src=
-   giftImage(gift.telegram_gift_id);
-
-  document.getElementById("resultName").textContent=
-   found ? found.name : gift.name;
-
-  document.getElementById("resultValue").textContent=
-   (gift.star_count || gift.estimated_value)+" ⭐";
-
+  document.getElementById("balance").textContent=Number(data.balance).toFixed(0)+" CR";
+  document.getElementById("resultImage").src=giftImage(gift.telegram_gift_id);
+  document.getElementById("resultName").textContent=found?found.name:gift.name;
+  document.getElementById("resultValue").textContent=(gift.star_count||gift.estimated_value)+" ⭐";
   document.getElementById("result").style.display="block";
-  setStatus("Подарок добавлен в твой внутренний инвентарь.");
-
-  if(tg?.HapticFeedback){
-   tg.HapticFeedback.notificationOccurred("success");
-  }
-
- }catch(error){
-  console.error(error);
-  setStatus("Не удалось связаться с сервером. Попробуй ещё раз.");
+  setStatus("Подарок добавлен во внутренний инвентарь.");
+  tg?.HapticFeedback?.notificationOccurred("success");
+ }catch(e){
+  console.error(e);
+  setStatus("Ошибка соединения с сервером. Попробуй ещё раз.");
  }finally{
   button.disabled=false;
   button.textContent="ОТКРЫТЬ КЕЙС";
