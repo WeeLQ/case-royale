@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>CASE ROYALE</title>
+<style>
+:root{--bg:#090909;--panel:#141310;--panel2:#1c1912;--gold:#e4bd70;--gold2:#a77b35;--muted:#9b9588;--line:#40331e;--green:#8ed2a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#3a2a13 0,#111 36%,var(--bg) 72%);color:#f7f2e8;font:15px Inter,system-ui,Arial,sans-serif;min-height:100vh;padding-bottom:88px}
+button{font:inherit;cursor:pointer} .wrap{max-width:720px;margin:auto}
+header{padding:23px 18px 16px;text-align:center;border-bottom:1px solid #3b2d19;background:linear-gradient(180deg,#1c160d99,transparent)}
+.crown{font-size:23px;color:var(--gold)}.logo{font-weight:950;letter-spacing:4px;font-size:clamp(25px,7vw,34px);color:var(--gold);text-shadow:0 2px 20px #b17b2844}.tag{font-size:9px;letter-spacing:4px;color:#b8a27a;margin-top:6px}
+main{padding:16px}.balance{border:1px solid #71552a;background:linear-gradient(120deg,#282012,#12110e 70%);border-radius:18px;padding:17px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 35px #0008}
+.muted{color:var(--muted);font-size:12px}.amount{font-size:27px;color:var(--gold);font-weight:850;margin-top:4px}.coin{font-size:34px}
+.section-title{font-size:17px;font-weight:800;margin:23px 2px 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile{border:1px solid var(--line);border-radius:16px;padding:17px 12px;background:linear-gradient(145deg,#211d15,#111);min-height:130px;text-align:left;color:#fff;transition:.15s}
+.tile:active{transform:scale(.98)}.tile .emoji{font-size:31px;margin-bottom:12px}.tile strong{display:block;font-size:14px;letter-spacing:.4px}.tile small{display:block;color:var(--muted);font-size:11px;margin-top:6px;line-height:1.4}
+.tile.wide{grid-column:1/-1;min-height:100px;display:flex;align-items:center;gap:15px}.tile.wide .emoji{margin:0}
+.panel{border:1px solid var(--line);border-radius:17px;background:#13120f;padding:16px;margin-top:13px}
+button.primary{background:linear-gradient(100deg,#a77b35,#f0d28e);color:#171109;border:0;border-radius:11px;padding:12px 16px;font-weight:850;width:100%;margin-top:13px}
+button.secondary{background:#272116;color:var(--gold);border:1px solid #604a27;border-radius:10px;padding:10px 13px;font-weight:700}
+button:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.back{color:var(--gold);background:none;border:0;padding:0;margin-bottom:14px;font-weight:700}
+.hidden{display:none!important}.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.case{background:#1a1711;border:1px solid #49391e;border-radius:14px;padding:14px;text-align:center}.case .emoji{font-size:38px}.case b{display:block;margin:8px 0}.case small{color:var(--muted)}
+.result{border:1px dashed #94713b;border-radius:14px;text-align:center;padding:18px;margin-top:14px;background:#1d180f}.result .emoji{font-size:48px}
+.betline{display:flex;gap:8px;margin-top:12px}.betline input{min-width:0;flex:1;background:#090909;color:#fff;border:1px solid var(--line);border-radius:10px;padding:11px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#100f0dF2;border-top:1px solid #42331e;display:flex;justify-content:center;gap:clamp(12px,5vw,34px);padding:12px 8px calc(12px + env(safe-area-inset-bottom));backdrop-filter:blur(12px);z-index:5}
+nav button{background:none;border:0;color:#c4ad7d;font-size:11px;display:grid;gap:4px;justify-items:center}nav span{font-size:19px}
+.note{color:#716b5f;text-align:center;font-size:10px;line-height:1.5;margin:24px 5px 10px}
+.pill{font-size:10px;color:#b9a276;border:1px solid #594525;border-radius:20px;padding:5px 9px}
+@media(min-width:600px){main{padding:22px}.tile{padding:20px}.case-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="crown">♛</div><div class="logo">CASE ROYALE</div><div class="tag">OPEN • PLAY • WIN</div></header>
+<main>
+<section id="home">
+ <div class="balance"><div><div class="muted">ДЕМО-БАЛАНС</div><div class="amount" id="balance">1 000 CR</div><div class="muted">Виртуальные монеты</div></div><div class="coin">🪙</div></div>
+ <div class="section-title">♛ Игровой зал</div>
+ <div class="grid">
+  <button class="tile" onclick="show('cases')"><div class="emoji">🎁</div><strong>КЕЙСЫ</strong><small>Открывай кейсы и собирай коллекцию</small></button>
+  <button class="tile" onclick="show('roulette')"><div class="emoji">🎡</div><strong>РУЛЕТКА</strong><small>Проверь удачу в демо-режиме</small></button>
+  <button class="tile" onclick="show('jackpot')"><div class="emoji">💰</div><strong>ДЖЕКПОТ</strong><small>Игровой общий банк</small></button>
+  <button class="tile" onclick="show('battle')"><div class="emoji">⚔️</div><strong>CASE BATTLE</strong><small>Тестовая дуэль с ботом</small></button>
+  <button class="tile wide" onclick="show('upgrade')"><div class="emoji">💎</div><div><strong>АПГРЕЙД ПРЕДМЕТОВ</strong><small>Рискни виртуальным предметом ради улучшения</small></div></button>
+ </div>
+ <div class="section-title">Твоя коллекция</div><div class="panel row"><div><b>Предметов: <span id="itemCount">0</span></b><div class="muted">Все выигрыши хранятся в этом демо-сеансе</div></div><button class="secondary" onclick="show('profile')">Инвентарь</button></div>
+ <div class="note">DEMO VERSION 0.2 · Только виртуальные монеты. Нет депозитов, денежных ставок или вывода призов.</div>
+</section>
+
+<section id="cases" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">🎁 Выбери кейс</div><div class="case-grid" id="caseGrid"></div><div id="caseResult"></div></section>
+<section id="roulette" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">🎡 Рулетка</div><div class="panel"><div class="muted">Виртуальная ставка</div><div class="betline"><input id="rouletteBet" type="number" min="10" max="1000" value="50"><button class="secondary" onclick="spin()">Крутить</button></div><div class="result" id="rouletteResult"><div class="emoji">🎡</div><b>Готов испытать удачу?</b><div class="muted">Условный множитель: x0 / x2 / x5</div></div></div></section>
+<section id="jackpot" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">💰 Демо-джекпот</div><div class="panel"><div class="muted">Текущий виртуальный банк</div><div class="amount" id="pot">250 CR</div><p class="muted">Добавь виртуальные монеты и участвуй в розыгрыше с демонстрационными ботами.</p><div class="betline"><input id="potBet" type="number" min="10" max="500" value="25"><button class="secondary" onclick="joinPot()">Войти</button></div><button class="primary" onclick="drawPot()">Разыграть демо-джекпот</button><div id="potStatus" class="muted" style="margin-top:12px">Участников: 3 (демо)</div></div></section>
+<section id="battle" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">⚔️ Case Battle</div><div class="panel"><div class="row"><b>Ты</b><span class="pill">VS</span><b>Демо-бот</b></div><div class="result"><div style="font-size:38px">🎁 ⚔️ 🎁</div><div class="muted">Один раунд · стоимость 100 CR</div></div><button class="primary" onclick="battle()">Начать тренировочную дуэль · 100 CR</button><div id="battleResult" class="muted" style="margin-top:12px"></div></div></section>
+<section id="upgrade" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">💎 Апгрейд предмета</div><div class="panel"><p class="muted">Используй предмет из коллекции. При успехе получишь предмет более высокого уровня; при неудаче предмет сгорает в рамках демо-игры.</p><div id="upgradeInfo"></div><button class="primary" onclick="upgrade()">Попробовать апгрейд · 60% шанс</button><div id="upgradeResult" class="muted" style="margin-top:12px"></div></div></section>
+<section id="profile" class="hidden"><button class="back" onclick="show('home')">← Назад</button><div class="section-title">👤 Профиль и инвентарь</div><div class="panel"><div class="row"><b>Игрок CASE ROYALE</b><span class="pill">DEMO</span></div><p class="muted">Баланс: <b id="profileBalance">1 000 CR</b></p><p class="muted">Предметы:</p><div id="inventory">Пока пусто. Открой первый кейс!</div><button class="secondary" style="margin-top:14px" onclick="resetDemo()">Сбросить демо-прогресс</button></div></section>
+</main>
+<nav><button onclick="show('home')"><span>⌂</span>Главная</button><button onclick="show('cases')"><span>🎁</span>Кейсы</button><button onclick="show('roulette')"><span>🎡</span>Рулетка</button><button onclick="show('profile')"><span>👤</span>Профиль</button></nav>
+</div>
+<script>
+const cases=[
+ {name:'Бронзовый',price:100,emoji:'📦',items:[['Медный жетон','🪙',60],['Серебряная маска','🎭',25],['Золотой кубок','🏆',12],['Королевский кристалл','💎',3]]},
+ {name:'Золотой',price:250,emoji:'🟨',items:[['Серебряная маска','🎭',45],['Золотой кубок','🏆',35],['Королевский кристалл','💎',17],['Корона короля','👑',3]]},
+ {name:'Королевский',price:500,emoji:'👑',items:[['Золотой кубок','🏆',45],['Королевский кристалл','💎',35],['Корона короля','👑',17],['Драгоценный трон','💠',3]]}
+];
+let balance=1000, inventory=[],pot=250,potPlayers=3;
+const $=id=>document.getElementById(id);
+function fmt(n){return Math.floor(n).toLocaleString('ru-RU')+' CR'}
+function update(){ $('balance').textContent=fmt(balance);$('profileBalance').textContent=fmt(balance);$('itemCount').textContent=inventory.length;$('inventory').innerHTML=inventory.length?inventory.map(x=>`<div class="row" style="padding:8px 0;border-bottom:1px solid #302719"><span>${x.emoji} ${x.name}</span><span class="pill">${x.rarity}</span></div>`).join(''):'Пока пусто. Открой первый кейс!';$('pot').textContent=fmt(pot);$('potStatus').textContent='Участников: '+potPlayers+' (демо)';$('upgradeInfo').textContent=inventory.length?'Предметов в инвентаре: '+inventory.length:'Сначала открой кейс и получи предмет.'}
+function show(id){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden');update();if(id==='cases')renderCases();window.scrollTo(0,0)}
+function renderCases(){$('caseGrid').innerHTML=cases.map((c,i)=>`<div class="case"><div class="emoji">${c.emoji}</div><b>${c.name}</b><small>Цена: ${c.price} CR</small><button class="primary" onclick="openCase(${i})">Открыть</button></div>`).join('')}
+function choose(items){let n=Math.random()*100;for(const it of items){n-=it[2];if(n<=0)return it}return items[items.length-1]}
+function openCase(i){let c=cases[i];if(balance<c.price){$('caseResult').innerHTML='<div class="result">Недостаточно виртуальных монет.</div>';return}balance-=c.price;let it=choose(c.items);let rarity=it[2]<=3?'Легендарный':it[2]<=12?'Эпический':it[2]<=25?'Редкий':'Обычный';inventory.unshift({name:it[0],emoji:it[1],rarity});$('caseResult').innerHTML=`<div class="result"><div class="muted">ТЕБЕ ВЫПАЛО</div><div class="emoji">${it[1]}</div><b>${it[0]}</b><div class="pill" style="display:inline-block;margin-top:8px">${rarity}</div></div>`;update()}
+function spin(){let v=Math.max(10,Math.floor(+$('rouletteBet').value||10));if(v>balance){$('rouletteResult').innerHTML='Недостаточно монет.';return}balance-=v;let r=Math.random(),m=r<.55?0:r<.9?2:5;let win=v*m;balance+=win;$('rouletteResult').innerHTML=`<div class="emoji">${m===0?'💨':m===2?'✨':'👑'}</div><b>${m===0?'Не повезло':`Выигрыш ${fmt(win)}`}</b><div class="muted">Множитель x${m}</div>`;update()}
+function joinPot(){let v=Math.max(10,Math.floor(+$('potBet').value||10));if(v>balance){$('potStatus').textContent='Недостаточно монет.';return}balance-=v;pot+=v;potPlayers++;update()}
+function drawPot(){if(potPlayers<1)return;let win=pot;balance+=win;pot=250;potPlayers=3;$('potStatus').textContent='Ты выиграл демо-банк '+fmt(win)+'! Банк сброшен.';update()}
+function battle(){let cost=100;if(balance<cost){$('battleResult').textContent='Недостаточно монет.';return}balance-=cost;let you=Math.random()*100,bot=Math.random()*100;if(you>=bot){balance+=200;$('battleResult').textContent='Победа! Ты получил 200 CR.'}else $('battleResult').textContent='Демо-бот победил. Попробуй ещё раз.';update()}
+function upgrade(){if(!inventory.length){$('upgradeResult').textContent='Нет предметов для апгрейда.';return}let item=inventory[0];if(Math.random()<.6){inventory[0]={name:'Улучшенный '+item.name,emoji:'💎',rarity:'Эпический'};$('upgradeResult').textContent='Успех! Предмет улучшен.'}else{inventory.shift();$('upgradeResult').textContent='Неудача. Предмет потерян в демо-режиме.'}update()}
+function resetDemo(){balance=1000;inventory=[];pot=250;potPlayers=3;update();show('profile')}
+update();renderCases();
+</script>
+</body></html>
